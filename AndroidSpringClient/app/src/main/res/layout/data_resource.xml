@@ -4,12 +4,17 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="#A1A1A1"
-android:layout_margin="10dp">
+              android:layout_margin="10dp">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dataFromDB"
-            android:text="TEST"
+            android:id="@+id/localDateTimeTextView"
+            android:text="Date"
             android:padding="10dp"/>
-
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textFromDBTextView"
+            android:text="TEXT"
+            android:padding="10dp"/>
 </LinearLayout>

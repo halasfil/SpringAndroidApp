@@ -1,4 +1,4 @@
-package com.halasfilip.androidspringclient;
+package com.halasfilip.androidspringclient.utils;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.halasfilip.androidspringclient.R;
 
 import java.util.ArrayList;
 
@@ -37,12 +38,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter holder, int position) {
-        //in here we will pass method to include the data we will get from the springApp using retrofit client
-        //method is setting values in our item to see them in the recyclerview list
-//        holder.dataFromDB.setText("TEST");
+        // in here we will pass method to include the data we will
+        // get from the springApp using retrofit client
+        // method is setting values in our item to see them in the recyclerview list
+        // holder.dataFromDB.setText("TEST");
 
-        DataResource dataResource = mDataResource.get(position);
-        holder.dataFromDB.setText(dataResource.getDataToITemInList());
+//        DataResource dataResource = mDataResource.get(position);
+//        holder.dataFromDB.setText(dataResource.getDataToITemInList());
     }
 
     @Override
@@ -52,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void addItem(DataResource dataResource, String s) {
         //adding item will be parsed to be send as a retrofit object to springApp
-        dataResource.setDataToITemInList(s);
+//        dataResource.setInformationSent(s);
         mDataResource.add(dataResource);
 
 
