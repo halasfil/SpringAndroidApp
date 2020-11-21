@@ -11,4 +11,6 @@ public interface InformationsRepo {
 
     List<InformationSended> fetchThemAll();
 
+    boolean deleteById(Integer id);
+
 }
