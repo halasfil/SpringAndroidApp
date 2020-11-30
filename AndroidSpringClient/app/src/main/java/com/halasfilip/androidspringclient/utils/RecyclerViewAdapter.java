@@ -1,39 +1,66 @@
 package com.halasfilip.androidspringclient.utils;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.halasfilip.androidspringclient.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyAdapter> {
 
-    private ArrayList<DataResource> mDataResource;
+    private List<DataFetched> mDataFetched;
 
-    public RecyclerViewAdapter(ArrayList<DataResource> dataResources) {
-        mDataResource = dataResources;
+    public RecyclerViewAdapter(List<DataFetched> dataFetched) {
+        mDataFetched = dataFetched;
+        notifyDataSetChanged();
+
+        //done
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void addItem(Integer id, String creationTime, String informationSent) {
+        Stream<DataFetched> dataFetchedStream = mDataFetched.stream();
+
+        if (dataFetchedStream.noneMatch(d -> d.getId().equals(id))){
+            mDataFetched.add(new DataFetched(id, creationTime, informationSent));
+            notifyItemInserted(mDataFetched.size() - 1);
+        }
+
     }
 
     public static class MyAdapter extends RecyclerView.ViewHolder {
-        public TextView dataFromDB;
+        public TextView localDateTimeTextView, textFromDBTextView;
 
         public MyAdapter(@NonNull View itemView) {
+            //onCreate
             super(itemView);
-            dataFromDB = itemView.findViewById(R.id.dataFromDB);
+            localDateTimeTextView = itemView.findViewById(R.id.localDateTimeTextView);
+            textFromDBTextView = itemView.findViewById(R.id.textFromDBTextView);
+
+            //done
         }
+        //done
     }
 
     @NonNull
     @Override
     public MyAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater
+                .from(parent.getContext())
                 .inflate(R.layout.data_resource, parent, false);
         MyAdapter myAdap = new MyAdapter(view);
         return myAdap;
+        //done
+
     }
 
     @Override
@@ -45,19 +72,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 //        DataResource dataResource = mDataResource.get(position);
 //        holder.dataFromDB.setText(dataResource.getDataToITemInList());
+
+        DataFetched dataFetched = mDataFetched.get(position);
+
+        holder.textFromDBTextView.setText(dataFetched.getInformationSent());
+        holder.localDateTimeTextView.setText(dataFetched.getCreationTime());
+
     }
+
 
     @Override
     public int getItemCount() {
-        return mDataResource.size();
+        return mDataFetched.size();
     }
 
-    public void addItem(DataResource dataResource, String s) {
-        //adding item will be parsed to be send as a retrofit object to springApp
-//        dataResource.setInformationSent(s);
-        mDataResource.add(dataResource);
 
-
-        notifyItemInserted(mDataResource.size() - 1);
-    }
 }
