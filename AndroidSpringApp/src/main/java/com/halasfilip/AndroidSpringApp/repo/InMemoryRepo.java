@@ -18,8 +18,10 @@ public class InMemoryRepo implements InformationsRepo {
     private static AtomicInteger idCount;
 
     public InMemoryRepo() {
+
         informationsSendedList = new ArrayList<>();
         idCount = new AtomicInteger(1);
+
     }
 
 
@@ -36,17 +38,22 @@ public class InMemoryRepo implements InformationsRepo {
                 .informationSent(createInformationToBeSentDTO.getInformationSent())
                 .build();
         informationsSendedList.add(informationSent);
+
     }
 
     @Override
     public List<InformationSended> fetchThemAll() {
+
         return informationsSendedList;
+
     }
 
     @Override
     public boolean deleteById(Integer id) {
+
         informationsSendedList.removeIf(product -> id.equals(product.getId()));
         return false;
+
     }
 
 
